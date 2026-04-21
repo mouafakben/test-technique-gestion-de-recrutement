@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, h, resolveComponent, watch } from 'vue'
-import type { Candidature } from '@/types/types'
+import type { Candidature } from '@/types/candidature'
 import type { TableColumn } from '@nuxt/ui'
-import { useCandidatureStore } from '@/stores/Candidature'
+import { useCandidatureStore } from '@/stores/CandidatureStore'
 
 const candidatureStore = useCandidatureStore()
 
@@ -86,6 +86,8 @@ const columns: TableColumn<Candidature>[] = [
 </script>
 
 <template>
+    <!-- title: Liste toutes les candidatures -->
+     
     <div class="flex flex-col gap-4">
         <div class="flex flex-wrap gap-3">
             <UInput v-model="search" placeholder="Rechercher..." icon="i-lucide-search" class="w-56" />
@@ -113,6 +115,14 @@ const columns: TableColumn<Candidature>[] = [
 
             <!-- Content -->
             <div v-else-if="selectedCandidat" class="space-y-3 text-sm">
+                <!-- dateCandidature -->
+                <div class="flex justify-between">
+                    <span class="text-muted">Date de candidature</span>
+                    <div class="flex gap-2 text-sm">
+                        <span>{{ new Date(selectedCandidat.dateCandidature).toLocaleDateString() }}</span>
+                        <span>{{ new Date(selectedCandidat.dateCandidature).toLocaleTimeString() }}</span>
+                    </div>
+                </div>
                 <div class="flex justify-between">
                     <span class="text-muted">Email</span>
                     <span>{{ selectedCandidat.email }}</span>

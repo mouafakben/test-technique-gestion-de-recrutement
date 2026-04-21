@@ -24,6 +24,7 @@ export interface Candidature {
     localisation: string;
     commentaires: Commentaire[];
 }
+
 export interface Status {
     id: number
     nom: string

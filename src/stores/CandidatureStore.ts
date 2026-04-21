@@ -1,7 +1,7 @@
 // stores/Candidature.ts
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { Candidature, Status } from '@/types/types'
+import type { Candidature, Status } from '@/types/candidature'
 
 export const useCandidatureStore = defineStore('condidatures', () => {
   const condidatures = ref<Candidature[]>([])
