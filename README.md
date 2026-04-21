@@ -22,6 +22,14 @@ npm install -g json-server
 npm run start
 ```
 
+## Temps passé sur chaque partie
+
+## Technical choices and their justifications
+
 ### Why i used a UI library
 
 I chose nuxt ui library because i am familiar with it and that allows me to avoid wasting time on writing boilerplate for ui functionalities like loading and ui states...etc
+
+## Captures d'écran de l'interface
+
+## Liste des améliorations possibles si plus de temps

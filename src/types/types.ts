@@ -1,5 +1,12 @@
 type status = 'En attente' | 'Entretien RH' | 'Entretien technique' | 'Accepté' | 'Refusé';
 
+export interface Commentaire {
+    id: number;
+    auteur: string;
+    date: string; // ISO 8601
+    contenu: string;
+}
+
 export interface Candidature {
     id: number;
     nom: string;
@@ -17,10 +24,9 @@ export interface Candidature {
     localisation: string;
     commentaires: Commentaire[];
 }
-
-export interface Commentaire {
-    id: number;
-    auteur: string;
-    date: string; // ISO 8601
-    contenu: string;
+export interface Status {
+    id: number
+    nom: string
+    couleur: string
+    ordre: number
 }
