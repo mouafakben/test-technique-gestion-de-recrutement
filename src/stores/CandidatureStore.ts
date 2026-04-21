@@ -11,7 +11,6 @@ export const useCandidatureStore = defineStore('condidatures', () => {
   const loading = ref(false)
   const loadingDetail = ref(false)
 
-
   const base_url = import.meta.env.VITE_BASE_PATH || ''
   const getCandidatures = async (params: Record<string, string | number> = {}) => {
     loading.value = true
@@ -39,5 +38,15 @@ export const useCandidatureStore = defineStore('condidatures', () => {
     selectedCandidature.value = await response.json()
     loadingDetail.value = false
   }
-  return { condidatures, total, loading, getCandidatures, getStatuts, statuts, selectedCandidature, getCandidatureById, loadingDetail }
+  return {
+    condidatures,
+    total,
+    loading,
+    getCandidatures,
+    getStatuts,
+    statuts,
+    selectedCandidature,
+    getCandidatureById,
+    loadingDetail,
+  }
 })

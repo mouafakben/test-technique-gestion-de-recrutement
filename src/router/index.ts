@@ -13,7 +13,7 @@ const routes = [
       { path: '/candidatures', component: Candidatures },
       { path: '/postes', component: Postes },
     ],
-  }
+  },
 ]
 
 const router = createRouter({

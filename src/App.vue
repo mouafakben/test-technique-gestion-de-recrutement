@@ -4,7 +4,6 @@
   <UApp>
     <router-view />
   </UApp>
-
 </template>
 
 <style scoped></style>
