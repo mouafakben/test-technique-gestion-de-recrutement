@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, h, resolveComponent, watch } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
+import { useToast } from '@nuxt/ui/composables'
 import type { Candidature } from '@/types/candidature'
 import type { TableColumn } from '@nuxt/ui'
 import { useCandidatureStore } from '@/stores/CandidatureStore'
 
 const candidatureStore = useCandidatureStore()
+const toast = useToast()
 
 const search = ref('')
 const statutFilter = ref('all')
@@ -19,32 +21,50 @@ const statutOptions = computed(() => [
   ...candidatureStore.statuts.map((s) => ({ label: s.nom, value: s.nom })),
 ])
 
-const fetchData = () => {
-  candidatureStore.getCandidatures({
-    ...(search.value && { q: search.value }),
-    ...(statutFilter.value !== 'all' && { statut: statutFilter.value }),
-    ...(competenceFilter.value && { competences_like: competenceFilter.value }),
-    ...(dateFilter.value && { dateCandidature: dateFilter.value }),
-    _page: page.value,
-    _limit: limit,
+const handleError = (error: unknown) => {
+  toast.add({
+    title: 'Erreur',
+    description: (error as Error).message,
+    color: 'error',
   })
 }
 
-const debouncedFetch = useDebounceFn(() => {
+const fetchData = async () => {
+  try {
+    await candidatureStore.getCandidatures({
+      ...(search.value && { q: search.value }),
+      ...(statutFilter.value !== 'all' && { statut: statutFilter.value }),
+      ...(competenceFilter.value && { competences_like: competenceFilter.value }),
+      ...(dateFilter.value && { dateCandidature: dateFilter.value }),
+      _page: page.value,
+      _limit: limit,
+    })
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+const debouncedFetch = useDebounceFn(async () => {
   page.value = 1
-  fetchData()
+  await fetchData()
 }, 300)
 
 onMounted(async () => {
-  await candidatureStore.getStatuts()
-  fetchData()
+  try {
+    await candidatureStore.getStatuts()
+    await fetchData()
+  } catch (error) {
+    handleError(error)
+  }
 })
 
 watch([search, competenceFilter], debouncedFetch)
-watch([statutFilter, dateFilter], () => {
+
+watch([statutFilter, dateFilter], async () => {
   page.value = 1
-  fetchData()
+  await fetchData()
 })
+
 watch(page, fetchData)
 
 const data = computed<Candidature[]>(() => candidatureStore.condidatures)
@@ -56,7 +76,11 @@ const loadingDetail = computed(() => candidatureStore.loadingDetail)
 
 async function openModal(candidat: Candidature) {
   isOpen.value = true
-  await candidatureStore.getCandidatureById(candidat.id)
+  try {
+    await candidatureStore.getCandidatureById(candidat.id)
+  } catch (error) {
+    handleError(error)
+  }
 }
 
 function resetFilters() {
