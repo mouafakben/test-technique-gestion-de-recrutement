@@ -16,7 +16,7 @@ npm install
 npm install -g json-server
 ```
 
-### Create .env file from .env.example
+### Create .env file
 
 ```sh
 cp .env.example .env
@@ -32,10 +32,17 @@ npm run start
 
 - Project setup: 30 minutes
 - Interface development: 4 hours
+- Refactoring: 1 hour
 
 ## Technical Choices
 
 **NuxtUI** — Chosen for familiarity and to avoid boilerplate for UI components, loading states, and common functionality.
+
+## Screenshots of the interface
+
+![candidatures list](./src/assets/images/screenshots/candidatures-list.png)
+![candidature details](./src/assets/images/screenshots/details.png)
+![error handling](./src/assets/images/screenshots/error-handling.png)
 
 ## Future Improvements
 
@@ -43,14 +50,23 @@ npm run start
 - unit test coverage
 - Custamizable composables
 
-### Todo List
+## Analysis and Diagnosis
 
-- [ ] Analyze the typical problems that recruiters may encounter:
+- [x] Analyze the typical problems that recruiters may encounter:
   - Large volume of applications to process
   - Need to quickly filter by skills, experience, status
   - Collaboration between several recruiters
   - Monitoring the progress of each candidate
-- [ ] **Deliverable:** A document listing the identified UX issues and your technical approach to solving them.
+
+- **My approach**
+  - Add real-time search using ?q=
+  - Use API filters (query params) instead of filtering in frontend
+  - Keep UI simple and scannable
+  - Show loading + error states clearly
+  - Use pagination to avoid loading too much data at once
+
+## Todo List
+
 - [x] **Data retrieval and display via API** :
   - [x] Upload applications from`GET /candidatures`
   - [x] Load statuses from`GET /statuts`
