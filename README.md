@@ -1,6 +1,8 @@
-# test-technique-gestion-des-candidatures
+# test-technique-gestion-de-recrutement
 
-This project is a technical assessment for Sig Service. all the requirements to run the project are listed below.
+## Introduction
+
+This project is a technical assessment completed as part of the Front-End Developer application process at SIG Service. It focuses on building a structured, scalable, and user-friendly interface for managing candidatures while following modern front-end best practices.
 
 ## Project Setup
 
@@ -36,7 +38,7 @@ npm run start
 
 ## Technical Choices
 
-**NuxtUI** — Chosen for familiarity and to avoid boilerplate for UI components, loading states, and common functionality.
+**NuxtUI** — Nuxt UI was chosen to accelerate development by providing pre-built, accessible, and consistent UI components, allowing focus on business logic rather than low-level styling.
 
 ## Screenshots of the interface
 
@@ -59,13 +61,13 @@ npm run start
   - Monitoring the progress of each candidate
 
 - **My approach**
-  - Add real-time search using ?q=
+  - Add real-time search using `?q=`
   - Use API filters (query params) instead of filtering in frontend
   - Keep UI simple and scannable
   - Show loading + error states clearly
   - Use pagination to avoid loading too much data at once
 
-## Todo List
+## Feature Coverage
 
 - [x] **Data retrieval and display via API** :
   - [x] Upload applications from`GET /candidatures`
@@ -82,24 +84,17 @@ npm run start
   - [x] Modal view or dedicated page
   - [x] Loading via`GET /candidatures/:id`
   - [x] Displaying the candidate's complete information
-  - [ ] Possible actions:
-    - Change the status (PATCH `/candidatures/:id`)
-    - Add a comment (PATCH `/candidatures/:id`)
+
 - [ ] **State management** :
   - [x] Use Pinia or Vuex for state management
   - [x] Store the data retrieved from the API
   - [ ] Synchronize local state with the API
   - [ ] Persist certain user preferences (active filters, preferred view)
 
-### **Bonus features (for Mid-Level):**
+### **Bonus features :**
 
-- [ ] Drag and drop to change the application status
-- [ ] Notification/Alert System
 - [x] Dark Mode
-- [ ] Unit tests (Vitest/Jest)
 - [x] Smooth animations (View or library transitions)
-- [ ] Optimistic UI updates
-- [ ] Cache management and data refresh
 
 ### **Part 3: Code Quality (1 hour)**
 
